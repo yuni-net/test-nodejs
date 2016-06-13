@@ -1,6 +1,20 @@
 var http = require('http');
 var fs = require('fs');
 
+var is_it_invalid_request = function(uri) {
+    if(uri.substr(0,1) == '/') {
+        return true;
+    }
+    if(uri.toLowerCase() == 'server.js') {
+        return true;
+    }
+    if(uri.indexOf('..') != -1) {
+        return true;
+    }
+
+    return false;
+}
+
 var get_extension = function(uri) {
     return uri.substr(uri.lastIndexOf('.')+1);
 }
@@ -9,6 +23,11 @@ http.createServer(function(request, response) {
     var uri = request.url.substr(1);
     if(uri == "") {
         uri = 'index.js';
+    }
+
+    if(is_it_invalid_request(uri)) {
+        response.writeHead(404, {'Content-Type': 'text/html'});
+        response.end("");
     }
 
     var extension = get_extension(uri);
