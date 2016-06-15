@@ -62,6 +62,6 @@ http.createServer(function(request, response) {
             }
         });
     }
-}).listen(8124);
+}).listen(80);
 
-console.log('Server running at http://localhost:8124/');
+console.log('Server running at http://localhost:80/');
