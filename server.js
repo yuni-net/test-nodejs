@@ -64,4 +64,4 @@ http.createServer(function(request, response) {
     }
 }).listen(80);
 
-console.log('Server running at http://localhost:80/');
+console.log('Server running at http://localhost:8000/');
